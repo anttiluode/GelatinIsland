@@ -1,0 +1,48 @@
+{
+  "schema": "gelatin-island/gates-v1",
+  "model_boundary": "computational toy; brain papers motivate tests but do not validate the toy",
+  "equation": "effective_arrival = launch * route(material) * primer(receiver,time)",
+  "gates": [
+    {
+      "name": "G0_PRIMER_IDENTIFIABILITY",
+      "passive": {
+        "path_limited": 0.5,
+        "primer_limited": 0.5,
+        "equal": true
+      },
+      "phase_poke": {
+        "path_limited": 0.5,
+        "primer_limited": 1.0,
+        "separates_hidden_causes": true
+      },
+      "pass": true
+    },
+    {
+      "name": "G1_ARRIVAL_PHASE",
+      "preferred_phase_effect": 0.8,
+      "opposite_phase_effect": 0.04000000000000001,
+      "preferred_to_opposite_ratio": 19.999999999999996,
+      "pass": true
+    },
+    {
+      "name": "G2_ABSOLUTE_TIME_WINDOW",
+      "pulse_count": 4,
+      "pulse_spacing_ms": 50.0,
+      "fast_tau_ms": 40.0,
+      "slow_tau_ms": 200.0,
+      "fast_final_state": 0.3480268853350245,
+      "slow_final_state": 0.7144244988812634,
+      "fast_launches": false,
+      "slow_launches": true,
+      "pass": true
+    },
+    {
+      "name": "G3_ROUTE_BURN_IN",
+      "initial_conductance": 0.35,
+      "after_8_trains": 0.890948096,
+      "after_3s_without_traffic": 0.3769322198390178,
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}
