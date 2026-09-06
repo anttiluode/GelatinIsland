@@ -1,5 +1,7 @@
 # Gelatin Island
 
+![pic](pic.png)
+
 **Neuron? Jello? Oscillating thing?** For now: a falsifiable computational toy for asking what happens when signals move through a writable medium and are accepted by receivers whose local state changes in time.
 
 Live demo: **https://anttiluode.github.io/GelatinIsland/**
