@@ -30,6 +30,31 @@ python -m unittest discover -s tests -v
 
 For local use, serve this folder with `python -m http.server 8000` and open `http://localhost:8000`. Directly opening `index.html` also runs the garden; the background comparison needs an HTTP origin in browsers that restrict local-file workers. No paid API or server computation is needed.
 
+## First spatial receipt
+
+At 216 × 128 cells, after 1,200 growth ticks and an identical 360-tick probe, the grown arrangement transmitted to more cells in **all six tested Estuary seeds**. Median cells reached beyond the protected source disk: **1,950 grown / 15.5 shuffled**. Seed 42, used during development, reached 5,174 / 73; the weakest additional seed reached 13 / 3. The spread matters: the striking case is not universal in magnitude.
+
+The comparison preserves every gel value and the 8-cell source neighbourhood, equalizes food, resets the fast state, and freezes the material. A pixel shuffle is a strong disruption of spatial correlation. This result establishes a causal effect of geometry under this protocol, not useful learning or a new neuron model.
+
+**[Full table and protocol](results/spatial/REPORT.md)** · **[Machine-readable receipt](results/spatial/summary.json)**
+
+```bash
+node experiments/run_spatial.cjs --seeds 42,7,19,73,101,2026 --out artifacts/spatial
+```
+
+## Let GitHub do the longer runs
+
+**[Spatial experiments and film](https://github.com/anttiluode/GelatinIsland/actions/workflows/spatial.yml)** runs on relevant pushes and can also be started with **Run workflow**. It checks the engine, runs eight seeds across all three habitats, saves every raw probe and the summary tables, and renders a 12-second H.264 animation from the actual simulation fields. The seed list and growth time are configurable; jobs are bounded and make no commits themselves. Results and the film are downloadable run artifacts retained for 30 days.
+
+To render the same film locally (requires FFmpeg):
+
+```bash
+python -m pip install -r requirements-render.txt
+node experiments/export_frames.cjs 42 estuary | python experiments/render_movie.py --out artifacts/gelatin-estuary.mp4
+```
+
+The offline film advances five ticks per frame (5× default live speed); its companion JSON records the seed, dimensions and timing. The browser's **Record 20s** records live canvas frames instead.
+
 ## The original model: route × primer
 
 The repo starts from one factorization:

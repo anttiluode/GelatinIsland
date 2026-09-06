@@ -1,0 +1,104 @@
+name: Spatial experiments and film
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'experiments/**'
+      - 'tests/test_world.cjs'
+      - 'requirements-render.txt'
+      - '.github/workflows/spatial.yml'
+  workflow_dispatch:
+    inputs:
+      seeds:
+        description: 'Comma-separated seeds (maximum 64)'
+        default: '42,7,19,73,101,2026,314,2718'
+        type: string
+      growth_ticks:
+        description: 'Growth ticks before the shape probe (100–20000)'
+        default: '1200'
+        type: string
+      render_film:
+        description: 'Also render the 12-second simulation film'
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spatial-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test tests/test_world.cjs
+
+  sweep:
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        habitat: [estuary, lace, bloom]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Every requested seed, with a matched material shuffle
+        env:
+          SWEEP_SEEDS: ${{ inputs.seeds || '42,7,19,73,101,2026,314,2718' }}
+          GROWTH_TICKS: ${{ inputs.growth_ticks || '1200' }}
+          HABITAT: ${{ matrix.habitat }}
+        run: node experiments/run_spatial.cjs --seeds "$SWEEP_SEEDS" --steps "$GROWTH_TICKS" --preset "$HABITAT" --out "artifacts/$HABITAT"
+      - name: Add the report to the run summary
+        env:
+          HABITAT: ${{ matrix.habitat }}
+        run: cat "artifacts/$HABITAT/REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shape-probes-${{ matrix.habitat }}
+          path: artifacts/${{ matrix.habitat }}/
+          retention-days: 30
+          if-no-files-found: error
+
+  film:
+    needs: checks
+    if: github.event_name == 'push' || inputs.render_film
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-render.txt
+      - name: Install the offline renderer
+        run: python -m pip install -r requirements-render.txt
+      - name: Render real simulation fields to H.264
+        run: |
+          command -v ffmpeg
+          node experiments/export_frames.cjs 42 estuary | python experiments/render_movie.py --out artifacts/gelatin-estuary.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gelatin-film
+          path: |
+            artifacts/gelatin-estuary.mp4
+            artifacts/gelatin-estuary.png
+            artifacts/gelatin-estuary.json
+          retention-days: 30
+          if-no-files-found: error
