@@ -21,3 +21,11 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Frozen gate receipt
         run: python experiments/run_gates.py --check --out /tmp/gelatin_gate_receipt.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Spatial engine and causal intervention checks
+        run: node --test tests/test_world.cjs
+      - name: JavaScript entrypoints
+        run: |
+          for file in web/*.js; do node --check "$file"; done

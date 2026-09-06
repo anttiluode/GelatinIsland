@@ -4,7 +4,33 @@
 
 Live demo: **https://anttiluode.github.io/GelatinIsland/**
 
-## The first useful split: route × primer
+## Version 2 — grow the world, then poke it
+
+The main page is now an interactive **excitable material**. Thousands of identical local carriers lay trails; trails consolidate into gel; gel determines signal propagation; excitation reinforces material and changes where carriers move next. There are no pre-drawn connections, assigned scout professions, or scheduled launch locations.
+
+- **Pulse, Feed, Cut, Dam, Open** directly intervene in the simulated fields.
+- **Freeze structure** lets signals travel through a held material geometry.
+- **Does the shape matter?** sends an identical pulse into the grown material and a spatially shuffled copy with the same amount of gel and the same source neighbourhood.
+- **Cinema** hides the interface; **Record 20s** exports the actual canvas as video on your device.
+- **Save/Load world** preserves the complete state and random generator, not just the seed.
+- Three parameter habitats: Estuary, Lace and Bloom. Desktop uses a larger grid than mobile.
+
+Start here: **[Live signal garden](https://anttiluode.github.io/GelatinIsland/)**. The previous demo remains available as the **[original route × primer lab](https://anttiluode.github.io/GelatinIsland/primer.html)**.
+
+This is an artificial medium, **not a validated neuron, evolved organism or demonstrated intelligent system**. Local chemotactic network formation has substantial prior art in Jeff Jones's Physarum models. The contribution here is the coupled simulation and its inspectable interventions. The biological inspirations motivate questions; they do not validate the equations.
+
+See **[MODEL.md](MODEL.md)** for equations, exactly what is supplied, what grows, the probe protocol, prior art and limitations. The browser and Node experiments execute the same dependency-free [world engine](web/world.js).
+
+Run the engine checks:
+
+```bash
+node --test tests/test_world.cjs
+python -m unittest discover -s tests -v
+```
+
+For local use, serve this folder with `python -m http.server 8000` and open `http://localhost:8000`. Directly opening `index.html` also runs the garden; the background comparison needs an HTTP origin in browsers that restrict local-file workers. No paid API or server computation is needed.
+
+## The original model: route × primer
 
 The repo starts from one factorization:
 
@@ -132,17 +158,9 @@ Four recent/related papers motivated specific pieces of the toy:
 
 These are **inspirations and constraints**, not validation of Gelatin Island.
 
-## The next serious step
+## Research that remains
 
-Do **not** add ten mechanisms at once.
-
-The next gate should make the sea spatial:
-
-> Can two different material fields produce the same passive source→receiver response, while a small set of diagnostic trains identifies which hidden field is present?
-
-That would turn `POKE` from a scalar intervention into an actual propagating probe.
-
-After that, the interesting question is whether a system can learn **when a diagnostic train is worth launching** without being handed a global map.
+Version 2 makes the sea spatial and tests the causal effect of rearranging it. It does not yet solve the original hidden-field identifiability task, choose diagnostic actions autonomously, reproduce biological dendrites, or learn a useful input/output task. Those are separate experiments, not consequences of an organic appearance.
 
 ## Non-claims
 
@@ -162,7 +180,9 @@ The point is to build a world where these ideas can be separated and attacked on
 - [`experiments/run_gates.py`](experiments/run_gates.py) — deterministic G0–G3 runner.
 - [`tests/test_gates.py`](tests/test_gates.py) — unit tests.
 - [`results/gate_receipt.json`](results/gate_receipt.json) — frozen initial receipt.
-- [`index.html`](index.html) — interactive Pages demo.
+- [`index.html`](index.html), [`web/`](web/) — spatial garden and shared engine.
+- [`primer.html`](primer.html) — preserved original scalar demo.
+- [`MODEL.md`](MODEL.md) — spatial model, interventions and limits.
 
 ## License
 

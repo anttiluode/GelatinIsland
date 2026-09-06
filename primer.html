@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Gelatin Island: route × primer, signal trains, writable substrate, local integration windows, and causal pokes." />
+  <title>Gelatin Island — route × primer</title>
+  <style>
+    :root{--bg:#071114;--panel:#0d1b1d;--panel2:#122528;--line:#254144;--text:#e8f3f1;--muted:#9bb4b1;--mint:#70e2bd;--cyan:#73c9ef;--amber:#f0c66b;--pink:#ee87b7;--red:#ff8383;--max:1120px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 18% 0%,rgba(112,226,189,.12),transparent 32rem),radial-gradient(circle at 90% 18%,rgba(115,201,239,.08),transparent 28rem),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}a{color:var(--cyan)}
+    .wrap{max-width:var(--max);margin:auto;padding:0 22px}nav{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(7,17,20,.88);backdrop-filter:blur(14px)}nav .wrap{min-height:58px;display:flex;align-items:center;gap:18px}nav strong{margin-right:auto}nav a{color:var(--muted);text-decoration:none;font-size:14px}@media(max-width:760px){nav a{display:none}}
+    header{padding:80px 0 52px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--mint);font-weight:850}h1{font-size:clamp(46px,8vw,84px);line-height:.96;letter-spacing:-.055em;margin:12px 0 18px;max-width:980px}h2{font-size:clamp(30px,4.8vw,50px);line-height:1.05;letter-spacing:-.035em;margin:0 0 14px}h3{margin:0 0 8px}.lead{font-size:clamp(18px,2.3vw,25px);color:#c7d9d6;max-width:900px}.muted{color:var(--muted)}
+    section{padding:58px 0;border-top:1px solid rgba(37,65,68,.75)}.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(18,37,40,.86),rgba(13,27,29,.84));padding:20px}.good{border-color:rgba(112,226,189,.4)}.warn{border-color:rgba(240,198,107,.4)}
+    code,pre{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}pre{padding:18px;border:1px solid var(--line);border-radius:14px;background:#071518;white-space:pre-wrap;overflow:auto;color:#d5e7e4}.equation{font-size:clamp(17px,2.2vw,22px);text-align:center}.badge-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}.badge{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:7px 10px;border-radius:999px;background:rgba(18,37,40,.55)}
+    .world{display:grid;grid-template-columns:1fr 1fr;gap:12px}.big{font-size:34px;font-weight:800;letter-spacing:-.04em}.label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}.bar{height:10px;border-radius:99px;background:#071518;overflow:hidden;margin:8px 0 4px}.bar>i{display:block;height:100%;width:50%;background:linear-gradient(90deg,var(--cyan),var(--mint));border-radius:99px;transition:width .35s ease}.button{appearance:none;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:11px 14px;border-radius:11px;font-weight:750;cursor:pointer}.button:hover{border-color:var(--mint)}.button.primary{background:rgba(112,226,189,.13);border-color:rgba(112,226,189,.48)}.button.amber{background:rgba(240,198,107,.12);border-color:rgba(240,198,107,.42)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+    .canvas-shell{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#061215}.canvas-shell canvas{display:block;width:100%;height:auto;aspect-ratio:16/8}.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px;background:rgba(13,27,29,.88);border-top:1px solid var(--line)}@media(max-width:760px){.controls{grid-template-columns:1fr}}input[type=range]{width:100%;accent-color:var(--mint)}.value{font-family:monospace;color:var(--mint)}
+    .timeline{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.timeline b{color:var(--mint)}.callout{border-left:4px solid var(--mint);padding:5px 0 5px 18px;font-size:20px;color:#d3e5e2;margin:24px 0;max-width:920px}table{width:100%;border-collapse:collapse}th,td{padding:11px 9px;border-bottom:1px solid var(--line);text-align:left}th{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}footer{padding:45px 0 70px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+<nav><div class="wrap"><strong>Gelatin Island</strong><a href="index.html">New signal garden ↗</a><a href="#split">route × primer</a><a href="#world">train world</a><a href="#gates">gates</a><a href="#papers">papers</a><a href="https://github.com/anttiluode/GelatinIsland">GitHub</a></div></nav>
+
+<header class="wrap">
+  <div class="kicker">Signal trains in a writable sea</div>
+  <h1>Same connection. Different moment. Different machine.</h1>
+  <p class="lead">A signal has to do two different things: <b>reach</b> an island, and arrive while that island is <b>receptive</b>. Gelatin Island keeps those causes separate, then lets a poke tell them apart.</p>
+  <div class="badge-row"><span class="badge">slow material route</span><span class="badge">fast receiver primer</span><span class="badge">local time windows</span><span class="badge">traffic burns paths</span><span class="badge">active causal probes</span><span class="badge">toy model, not brain claim</span></div>
+</header>
+
+<section id="split"><div class="wrap">
+  <div class="kicker">The first equation</div><h2>Route × primer</h2>
+  <pre class="equation">effective arrival = launch × route(material) × primer(receiver, time)</pre>
+  <div class="grid g2">
+    <div class="card"><div class="label">Slow routing</div><h3>Can the train get there?</h3><p class="muted">Material geometry, conductance, attenuation, delay, and deposited traffic history determine how easily a signal crosses the sea.</p></div>
+    <div class="card"><div class="label">Fast receptivity</div><h3>If it arrives now, does it matter?</h3><p class="muted">The receiver has a local phase-dependent gain: <b>primer</b>. Same route, same train, different arrival phase → different effect.</p></div>
+  </div>
+  <div class="callout">Weak transmission is ambiguous. It can mean <b>bad road</b> or <b>closed receiver</b>. Passive observation sees only the product.</div>
+
+  <div class="grid g2">
+    <div class="card good" id="worldA"><div class="label">World A · path-limited</div><div class="world"><div><span class="muted">route</span><div class="big">0.50</div></div><div><span class="muted">primer</span><div class="big">1.00</div></div></div><div class="bar"><i id="barA"></i></div><p>Observed transfer: <b id="outA">0.50</b></p></div>
+    <div class="card good" id="worldB"><div class="label">World B · primer-limited</div><div class="world"><div><span class="muted">route</span><div class="big">1.00</div></div><div><span class="muted">primer</span><div class="big" id="primerB">0.50</div></div></div><div class="bar"><i id="barB"></i></div><p>Observed transfer: <b id="outB">0.50</b></p></div>
+  </div>
+  <div class="actions"><button class="button primary" id="phasePoke">POKE: open receiver phase</button><button class="button" id="resetWorlds">Reset passive state</button></div>
+  <p class="muted" id="pokeText" style="margin-top:12px">Before the poke, both worlds are exactly 0.50. Their hidden causal decomposition is not identifiable from passive transfer alone.</p>
+</div></section>
+
+<section id="world"><div class="wrap">
+  <div class="kicker">Toy sea</div><h2>Launch a train. Change the receiver. Burn the road.</h2>
+  <p class="muted">The animation is illustrative; the deterministic Python gates below are the actual receipt. Use it to see the separation between route state and receiver state.</p>
+  <div class="canvas-shell">
+    <canvas id="sea" width="1000" height="500"></canvas>
+    <div class="controls">
+      <label><b>Route conductance</b><br><span class="muted">slow substrate</span><br><input id="routeSlider" type="range" min="0.1" max="1" step="0.01" value="0.48"><span class="value" id="routeValue">0.48</span></label>
+      <label><b>Receiver phase</b><br><span class="muted">fast primer</span><br><input id="phaseSlider" type="range" min="-3.1416" max="3.1416" step="0.01" value="0"><span class="value" id="phaseValue">0.00 rad</span></label>
+      <div><b>Intervene</b><br><span class="muted">message or diagnostic poke</span><div class="actions"><button class="button primary" id="launch">Launch train</button><button class="button amber" id="burn">Burn route ×8</button></div></div>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><div class="label">Route</div><div class="big" id="routeRead">0.48</div><p class="muted">Effective material conductance after burn-in.</p></div>
+    <div class="card"><div class="label">Primer</div><div class="big" id="primerRead">1.00</div><p class="muted">Receiver phase gate. Minimum is 0.05.</p></div>
+    <div class="card"><div class="label">Predicted effect</div><div class="big" id="effectRead">0.48</div><p class="muted">route × primer for a unit train.</p></div>
+  </div>
+</div></section>
+
+<section id="times"><div class="wrap"><div class="kicker">Three clocks</div><h2>FAST / MEDIUM / SLOW</h2>
+  <div class="timeline"><b>FAST</b><div><strong>Train arrival + receiver phase.</strong><br><span class="muted">A few milliseconds can change whether an otherwise identical arrival has leverage.</span></div></div>
+  <div class="timeline"><b>MEDIUM</b><div><strong>Island integration state.</strong><br><span class="muted">Local geometry and dynamics determine how long recent inputs remain able to cooperate.</span></div></div>
+  <div class="timeline"><b>SLOW</b><div><strong>Material substrate.</strong><br><span class="muted">Repeated traffic can deposit a route trace; the world itself changes the propagation operator seen by later trains.</span></div></div>
+  <pre>history → material → route → arrival timing × primer → local integration → launch → new train → material</pre>
+</div></section>
+
+<section id="gates"><div class="wrap"><div class="kicker">Deterministic receipt</div><h2>Four small claims, four attacks</h2>
+  <table><thead><tr><th>Gate</th><th>Test</th><th>Result</th></tr></thead><tbody>
+    <tr><td>G0 · Primer identifiability</td><td>Two passive worlds both output 0.50; phase poke makes them 0.50 vs 1.00.</td><td>PASS</td></tr>
+    <tr><td>G1 · Arrival phase</td><td>Same 0.8 route: preferred vs opposite phase gives 0.80 vs 0.04.</td><td>PASS</td></tr>
+    <tr><td>G2 · Time window</td><td>Four 0.25 pulses at 50 ms: τ=40 ms stays below threshold; τ=200 ms crosses it.</td><td>PASS</td></tr>
+    <tr><td>G3 · Route burn-in</td><td>Route rises 0.35 → 0.891 after traffic, then relaxes toward baseline.</td><td>PASS</td></tr>
+  </tbody></table>
+  <div class="actions"><a class="button" href="results/gate_receipt.json">Open JSON receipt</a><a class="button" href="gelatin_island.py">Core model</a></div>
+</div></section>
+
+<section id="papers"><div class="wrap"><div class="kicker">Biological rhyme, not validation</div><h2>What inspired each piece</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Arrival phase</h3><p class="muted">Drebitz, Rausch & Kreiter (2025): electrically evoked V2 volleys had strongly gamma-phase-dependent effects downstream in V4 and behavior.</p><a href="https://doi.org/10.1038/s41467-025-62732-8">10.1038/s41467-025-62732-8</a></div>
+    <div class="card"><h3>Integration windows</h3><p class="muted">Norman-Haignere et al. (2025): auditory cortical integration windows grow across hierarchy and are predominantly yoked to absolute time.</p><a href="https://doi.org/10.1038/s41593-025-02060-8">10.1038/s41593-025-02060-8</a></div>
+    <div class="card"><h3>Launcher boundary</h3><p class="muted">Leterrier (2018): the axon initial segment generates/shapes action potentials, separates compartments, and is structurally plastic.</p><a href="https://doi.org/10.1523/JNEUROSCI.1922-17.2018">10.1523/JNEUROSCI.1922-17.2018</a></div>
+    <div class="card"><h3>Spatial island</h3><p class="muted">Aizenbud et al. (2026): dendritic morphology, compartmentalization and nonlinear synapses contribute to modeled neuronal I/O complexity.</p><a href="https://doi.org/10.1073/pnas.2533168123">10.1073/pnas.2533168123</a></div>
+  </div>
+  <div class="callout">Next: make the sea truly spatial and ask whether diagnostic trains can identify hidden material fields that passive source→receiver measurements cannot.</div>
+</div></section>
+
+<footer><div class="wrap">Gelatin Island is experimental research code. It does not claim that the brain is gelatin, that EEG slowing is literal conduction slowing, or that this primer is a known biological entity. <a href="https://github.com/anttiluode/GelatinIsland">Source on GitHub</a>.</div></footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const floor = 0.05;
+  const primer = phase => floor + (1-floor)*0.5*(1+Math.cos(phase));
+
+  function setWorldB(p){
+    $('primerB').textContent = p.toFixed(2);
+    const out = p;
+    $('outB').textContent = out.toFixed(2);
+    $('barB').style.width = `${100*out}%`;
+  }
+  $('phasePoke').onclick = () => {
+    setWorldB(1.0);
+    $('pokeText').innerHTML = '<b>Separated.</b> World A stays at 0.50 because the road is the bottleneck. World B rises to 1.00 because opening the receiver removes its hidden bottleneck.';
+  };
+  $('resetWorlds').onclick = () => {
+    setWorldB(0.5);
+    $('barA').style.width = '50%';
+    $('outA').textContent = '0.50';
+    $('pokeText').textContent = 'Before the poke, both worlds are exactly 0.50. Their hidden causal decomposition is not identifiable from passive transfer alone.';
+  };
+
+  const canvas = $('sea'); const ctx = canvas.getContext('2d');
+  let baseRoute = 0.48, memory = 0, phase = 0, particles = [], flashes = [];
+  const A={x:170,y:260,r:54,name:'LAUNCH'}, B={x:820,y:255,r:70,name:'ISLAND'}, C={x:510,y:125,r:36,name:'TRACE'};
+  const effectiveRoute = () => baseRoute + memory*(1-baseRoute);
+  const effect = () => effectiveRoute()*primer(phase);
+
+  function updateReadouts(){
+    $('routeValue').textContent = baseRoute.toFixed(2);
+    $('phaseValue').textContent = `${phase.toFixed(2)} rad`;
+    $('routeRead').textContent = effectiveRoute().toFixed(2);
+    $('primerRead').textContent = primer(phase).toFixed(2);
+    $('effectRead').textContent = effect().toFixed(2);
+  }
+  $('routeSlider').oninput=e=>{baseRoute=+e.target.value;updateReadouts()};
+  $('phaseSlider').oninput=e=>{phase=+e.target.value;updateReadouts()};
+  $('launch').onclick=()=>{
+    const n=6; for(let i=0;i<n;i++) particles.push({t:-i*0.045,speed:0.0105,amp:1});
+  };
+  $('burn').onclick=()=>{for(let i=0;i<8;i++)memory+=0.2*(1-memory);updateReadouts()};
+
+  function blob(x,y,r,phaseOffset,fill,stroke,label){
+    ctx.save();ctx.translate(x,y);ctx.beginPath();
+    const pts=48;for(let i=0;i<=pts;i++){const a=i/pts*Math.PI*2;const rr=r*(1+0.07*Math.sin(a*3+phaseOffset)+0.04*Math.sin(a*7-phaseOffset));const px=Math.cos(a)*rr,py=Math.sin(a)*rr;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#e8f3f1';ctx.font='700 14px system-ui';ctx.textAlign='center';ctx.fillText(label,0,5);ctx.restore();
+  }
+  function pathPoint(t){const x=A.x+(B.x-A.x)*t;const bend=-105*Math.sin(Math.PI*t);const y=A.y+(B.y-A.y)*t+bend;return{x,y}}
+  function drawRoute(){
+    ctx.beginPath();for(let i=0;i<=100;i++){const p=pathPoint(i/100);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}
+    const alpha=0.16+0.62*effectiveRoute();ctx.strokeStyle=`rgba(112,226,189,${alpha})`;ctx.lineWidth=5+11*memory;ctx.lineCap='round';ctx.stroke();
+    ctx.beginPath();for(let i=0;i<=100;i++){const p=pathPoint(i/100);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.strokeStyle='rgba(115,201,239,.28)';ctx.lineWidth=2;ctx.stroke();
+  }
+  function tick(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const g=ctx.createRadialGradient(500,240,20,500,240,600);g.addColorStop(0,'#0d2528');g.addColorStop(1,'#061215');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);
+    for(let i=0;i<18;i++){ctx.fillStyle=`rgba(115,201,239,${0.018+0.012*Math.sin(performance.now()/900+i)})`;ctx.beginPath();ctx.arc(70+i*54,80+(i%4)*85,18+(i%5)*6,0,Math.PI*2);ctx.fill()}
+    drawRoute();
+    blob(C.x,C.y,C.r,performance.now()/1400,'rgba(238,135,183,.10)','rgba(238,135,183,.45)','TRACE');
+    blob(A.x,A.y,A.r,performance.now()/1000,'rgba(112,226,189,.13)','rgba(112,226,189,.65)','LAUNCH');
+    const p=primer(phase);blob(B.x,B.y,B.r,phase,'rgba(115,201,239,.10)',`rgba(115,201,239,${0.25+0.65*p})`,'ISLAND');
+    ctx.strokeStyle=`rgba(240,198,107,${0.25+0.65*p})`;ctx.lineWidth=5;ctx.beginPath();ctx.arc(B.x,B.y,B.r+13,-Math.PI/2,-Math.PI/2+Math.PI*2*p);ctx.stroke();
+
+    particles.forEach(q=>{q.t+=q.speed; if(q.t>=0&&q.t<=1){const pt=pathPoint(q.t);ctx.fillStyle='#f0c66b';ctx.shadowColor='#f0c66b';ctx.shadowBlur=15;ctx.beginPath();ctx.arc(pt.x,pt.y,8,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0} if(q.t>1&&!q.hit){q.hit=true;flashes.push({life:1,amp:effect()})}});
+    particles=particles.filter(q=>q.t<1.15);
+    flashes.forEach(f=>{f.life-=0.025;ctx.strokeStyle=`rgba(240,198,107,${Math.max(0,f.life)*f.amp})`;ctx.lineWidth=4;ctx.beginPath();ctx.arc(B.x,B.y,B.r+24+(1-f.life)*80,0,Math.PI*2);ctx.stroke()});flashes=flashes.filter(f=>f.life>0);
+    memory*=0.99992; updateReadouts();requestAnimationFrame(tick);
+  }
+  updateReadouts();tick();
+</script>
+</body>
+</html>
